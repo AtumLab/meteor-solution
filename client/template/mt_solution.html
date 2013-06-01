@@ -1,0 +1,54 @@
+<head>
+  <title>mt_solution</title>
+</head>
+
+<body>
+	{{> page}}
+	{{> more}}
+	{{> addTemplate}}
+</body>
+
+
+<template name="page">
+	<div class="container main_content">
+		<h3 class="main-title">
+		 	Page
+		</h3>
+		{{#each messages}}
+			<div class="line">{{ message }} {{ date }} <i class="icon-remove"></i></div>
+		{{/each}}
+		
+		<div class="pager-line">
+			{{ page_nav }}
+			{{ count }}	
+		</div>		
+	</div>
+</template>
+
+<template name="more">
+	<div class="container main_content">
+		<h3 class="main-title">
+		 	More
+		</h3>
+		{{#each messages}}
+			<div class="line">{{ message }} {{ date }} <i class="icon-remove"></i></div>
+		{{/each}}
+		<div class="pager-line">
+			<a class="more">
+				<span class="button-content">load more</span>
+			</a>
+			<a class="less">
+				<span class="button-content">load less</span>
+			</a>
+		</div>
+	</div>
+</template>
+
+<template name="addTemplate">
+	<div class="container main_content">
+		<h3 class="main-title">
+		 	Add
+		</h3>
+		<input type="text" value="text here" />
+	</div>
+</template>

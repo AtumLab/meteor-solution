@@ -7,6 +7,9 @@ if (Meteor.isServer) {
 		},
 		removeMessage: function(id){
 			MessagesCollection.remove({_id: id});
+		},
+		updateMessage: function(id, uMessage){
+			MessagesCollection.update({_id: id}, {message: uMessage, date: Date.now()});
 		}
 	});	
 	Meteor.publish("page", function(page){
@@ -31,6 +34,13 @@ if (Meteor.isServer) {
 					self.added("more_message", idx, doc);
 					self.ready();
 				}								
+			},
+			changed: function (idx, doc) {				
+				console.log('MessagesCollection changed '+ idx);
+				if(idx){
+					self.changed("more_message", idx, doc);
+					self.ready();
+				}
 			},
 			removed: function (idx) {
 				console.log('MessagesCollection removed '+ idx);

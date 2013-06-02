@@ -2,6 +2,7 @@ if (Meteor.isClient) {
 	MessagesCollection = new Meteor.Collection("messages");
 	MMessagesCollection = new Meteor.Collection("more_message");
 	CountMessagesCollection = new Meteor.Collection("count_message");
+	Session.setDefault('messageSelect', null);
 	Session.setDefault('pagePost', 1);
 	Deps.autorun(function () {
 		Meteor.subscribe("page", [Session.get('pagePost')], function () {
@@ -67,6 +68,16 @@ console.log(pageEnd+"|"+currentPage);
 			return MMessagesCollection.find({}, {sort: { date: -1}}).fetch();
 		}
 	});
+	/**
+	Template.edit.helpers({
+		message: function () {
+			var id = MessagesCollection.findOne({_id: Session.get('messageSelect')});
+			if(id)
+				return id.message;
+			return '';
+		}
+	});
+	*/
 	Template.addTemplate.events({
 		'keypress': function(e, t){			
 			if(e.charCode == 13){
@@ -85,6 +96,15 @@ console.log(pageEnd+"|"+currentPage);
 			Meteor.call('removeMessage', this._id);
 			e.preventDefault();
 		},
+		'click i.icon-pencil': function(e, t){		
+			Session.set('messageSelect', this._id);
+			var id = MessagesCollection.findOne({_id: this._id});
+			if(id){
+				$('.edit-input').val(id.message);
+				$('#edit-message').modal('show');
+			}				
+			e.preventDefault();
+		}		
 	});
 	Template.more.events({
 		'click .more': function(e, t){
@@ -108,5 +128,15 @@ console.log(pageEnd+"|"+currentPage);
 			e.preventDefault();
 		},
 	});
-	
+	Template.edit.events({
+		'click .btn-primary': function(e, t){
+			Meteor.call('updateMessage', Session.get('messageSelect'), t.find('.edit-input').value, function (error, result){
+				if(error){
+					$('#edit-message').modal('show');
+				}				
+			});
+			$('#edit-message').modal('hide');
+			e.preventDefault();
+		}
+	});
 }

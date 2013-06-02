@@ -1,11 +1,12 @@
 <head>
-  <title>mt_solution</title>
+	<title>mt_solution</title>
 </head>
 
 <body>
 	{{> page}}
 	{{> more}}
 	{{> addTemplate}}
+	{{> edit}}
 </body>
 
 
@@ -15,7 +16,7 @@
 		 	Page
 		</h3>
 		{{#each messages}}
-			<div class="line">{{ message }} {{ date }} <i class="icon-remove"></i></div>
+			<div class="line"><i class="icon-pencil"></i>{{ message }} {{ date }} <i class="icon-remove"></i></div>
 		{{/each}}
 		
 		<div class="pager-line">
@@ -51,4 +52,23 @@
 		</h3>
 		<input type="text" value="text here" />
 	</div>
+</template>
+
+<template name="edit">
+<div id="edit-message" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Edit Message</h3>
+	</div>
+	<div class="modal-body">
+		<!--
+		<input type="text" value="{{ message }}" class="edit-input"/>
+		-->
+		<input type="text" value="" class="edit-input"/>	
+	</div>
+	<div class="modal-footer">
+		<a class="btn" data-dismiss="modal">Close</a>
+		<a class="btn btn-primary">Save changes</a>
+	</div>
+</div>
 </template>

@@ -17,7 +17,7 @@
 		 	Page
 		</h3>
 		{{#each messages}}
-			<div class="line"><i class="icon-pencil"></i>{{ message }} <i class="time">{{ changeTimeToDate date }}</i> <i class="icon-remove"></i></div>
+			<div class="line"><i class="icon-pencil"></i>{{ message }} {{ changeTimeToDate date }} <i class="icon-remove"></i></div>
 		{{/each}}
 		
 		<div class="pager-line">
@@ -33,7 +33,7 @@
 		 	More
 		</h3>
 		{{#each messages}}
-			<div class="line">{{ message }} <i class="time">{{ changeTimeToDate date }}</i> <i class="icon-remove"></i></div>
+			<div class="line">{{ message }} {{ date }} <i class="icon-remove"></i></div>
 		{{/each}}
 		<div class="pager-line">
 			<a class="more">

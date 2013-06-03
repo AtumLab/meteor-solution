@@ -64,5 +64,5 @@ input[type="text"] {
 i.time {
 	text-align: right;
 	float: right;
-	margin-right: 25px;
+	margin-right: 15px;
 }

@@ -61,17 +61,11 @@ console.log(pageEnd+"|"+currentPage);
 				return 'Page '+Session.get('pagePost')+"/"+page;
 			}
 			return 'None';
-		},
-		changeTimeToDate: function(time){
-			return moment("/Date("+time+")/").fromNow();
-		}	
+		}
 	});
 	Template.more.helpers({
 		messages: function () {
 			return MMessagesCollection.find({}, {sort: { date: -1}}).fetch();
-		},
-		changeTimeToDate: function(time){
-			return moment("/Date("+time+")/").fromNow();
 		}
 	});
 	/**
